@@ -21,7 +21,10 @@
       <div class="form-floating mb-3">
         
         <!-- Select element for saluation -->
-        <select name="inputSelect" class="form-select" id="inputSelect"></select>
+        <select name="inputSelect" class="form-select" id="inputSelect">
+
+          <!-- Options are added dynamically <option value="Mr.">Mr.</option>  -->
+        </select>
         <label for="inputSelect">Salutation:</label>
 
       </div>
@@ -44,6 +47,42 @@
   <script src="script.js"></script>
 
   <script>
+    // Populate the selection of salutations
+    const arr = ftnSalutation();
+    
+    //populate inputSelect dynamically
+    const selectList = document.getElementById("inputSelect");
+
+    selectList.options[0] = new Option("Please select", "");
+    /* manaul injection of options
+    selectList.options[1] = new Option("Mr.", "Mr.");
+    selectList.options[2] = new Option("Mrs.", "Mrs");
+    selectList.options[3] = new Option("Ms.", "Ms.");
+    selectList.options[4] = new Option("Dr.", "Dr.");
+    */
+
+    // Iterate through arr to dynamically inject the options
+    for (let i = 0; i < arr.length; i++) {
+
+
+      selectList.options[i+1] = new Option(arr[i], arr[i]); 
+    }
+
+    function ftnProcessName(){
+      const selectedChoice = document.getElementById("inputSelect").value;
+      const uName = document.getElementById("inputName").value;
+      
+      const validated = validateInputs(selectedChoice , uName);
+
+      if(!validated)
+        return alert("All inputs need to be completed.");
+      
+
+      // call ftnGreeting to display our feedback
+      
+      return alert(ftnGreeting(selectedChoice, uName));
+      
+    }
 
     // implement your statement(s) here
     // e.g. statement 1
