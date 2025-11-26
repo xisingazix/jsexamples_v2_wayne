@@ -35,8 +35,8 @@ Hint:
 */
 
 function validateInputs(choice = "", name = ""){
-    if(choice === "" || name === ""){
-      return;          
-    }
+    if(choice === "" || name === "")
+      return
+    
     return true
   }
