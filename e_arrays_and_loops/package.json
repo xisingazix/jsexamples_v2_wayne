@@ -1,14 +1,23 @@
 {
   "name": "e_arrays_and_loops",
   "version": "1.0.0",
+<<<<<<< HEAD
   "main": "index.js",
+=======
+  "description": "",
+  "main": "2d-array-asmt.js",
+>>>>>>> 0c0e91b (add exercises arrays and loops)
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+<<<<<<< HEAD
   "description": "",
+=======
+  "type": "module",
+>>>>>>> 0c0e91b (add exercises arrays and loops)
   "dependencies": {
     "prompt-sync": "^4.2.0"
   }
