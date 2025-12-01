@@ -152,15 +152,16 @@ class Field {
     }
     if (this.field[0][1] === HOLE && this.field[1][0] === HOLE){   // player trap prevention
       this.field[0][1] = GRASS;
+
     }
   }
-  //TODO: start() a method of the class to start the game
+  //DONE: start() a method of the class to start the game
   start() {
     this.gamePlay = true;   // set gamePLay to true to start
     this.field[0][0] = PLAYER;
     this.setHat(); //position of hat
     this.trapCheck()
-    //TODO:Ask to play
+   
     // while gamePlay === true, track the player moves and update
     do {
 
