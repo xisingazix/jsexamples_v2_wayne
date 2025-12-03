@@ -28,7 +28,7 @@ const OUT = "You went out-of-bounds, you lost!";
 // TODO: MAP ROWS, COLUMNS AND PERCENTAGE
 const ROWS = 10
 const COLS = 10;
-const PERCENT = 0.5;
+const PERCENT = 0.3;
 
 class Field {
 
@@ -65,9 +65,6 @@ class Field {
         // use Math.random() to randomise the holes in the map
       }
     }
-    if (map[0][1] === HOLE && map[1][0] === HOLE) // player trap prevention
-      map[0][1] = GRASS;
-    map[1][1] = GRASS;
     return map;
   }
   // Done: welcomeMessage is a static method, displays a string
@@ -81,7 +78,7 @@ class Field {
 
   // TODO: setHat positions the hat along a random x and y position within field array
   setHat() {      // cannot be static as it calls upon field, a  property
-    const xHat = Math.floor(Math.random() * (ROWS - 2)) + 2;
+    const xHat = Math.floor(Math.random() * (ROWS - 2)) + 2;  
     const yHat = Math.floor(Math.random() * (COLS - 1)) + 1;
     this.field[xHat][yHat] = HAT;
     this.hatPosition.x = xHat;
@@ -120,8 +117,7 @@ class Field {
     let yNew = this.newPosition.y;
     //capture player's currentX andY position
     //1. update the field to show the player's new position
-    this.field[xCur][yCur] = GRASS
-
+    this.field[xCur][yCur] = GRASS // change current position to grass
 
     //2. if player move out of bound, LOSE// process.exit() ; 
     if (xNew === - 1 || xNew > (ROWS - 1)) {
@@ -143,23 +139,27 @@ class Field {
       process.exit();
     }
     //otherwise,move the player to the new x and y position base on move
-    this.field[xNew][yNew] = PLAYER
+    this.field[xNew][yNew] = PLAYER   // move player to new location
     this.playerPosition.x = this.newPosition.x;
     this.playerPosition.y = this.newPosition.y;
   }
-  hatTrap() {  //prevent hat trapped
-    if ((this.field[this.hatPosition.x - 1][this.hatPosition.y] !== GRASS) //check top
-      && (this.field[this.hatPosition.x + 1][this.hatPosition.y] !== GRASS)  //check btm
-      && (this.field[this.hatPosition.x][this.hatPosition.y - 1] !== GRASS) //check left   
-      && (this.field[this.hatPosition.x][this.hatPosition.y + 1] !== GRASS)) //check right
-    { this.field[this.hatPosition.x - 1][this.hatPosition.y] = GRASS; }
+  trapCheck(){  //prevent player or hat trapped
+    if ((this.field[this.hatPosition.x - 1][this.hatPosition.y] !== GRASS)    //check top
+      && (this.field[this.hatPosition.x + 1][this.hatPosition.y] !== GRASS)   //check btm
+      && (this.field[this.hatPosition.x][this.hatPosition.y - 1] !== GRASS)   //check left   
+      && (this.field[this.hatPosition.x][this.hatPosition.y + 1] !== GRASS)){ //check right
+      this.field[this.hatPosition.x - 1][this.hatPosition.y] = GRASS; 
+    }
+    if (this.field[0][1] === HOLE && this.field[1][0] === HOLE){   // player trap prevention
+      this.field[0][1] = GRASS;
+    }
   }
   //TODO: start() a method of the class to start the game
   start() {
     this.gamePlay = true;   // set gamePLay to true to start
     this.field[0][0] = PLAYER;
     this.setHat(); //position of hat
-    this.hatTrap()
+    this.trapCheck()
     //TODO:Ask to play
     // while gamePlay === true, track the player moves and update
     do {
