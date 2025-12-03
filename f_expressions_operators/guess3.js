@@ -1,24 +1,22 @@
 let ans = 10;
 
 let userInput = prompt("Guess the number. Press q or Q to quit.").toLowerCase();
-
-// as long as the user doesn't enter 'q' AND 'Q', run the loop
-while (userInput !== 'q') {
+//if user press q or Q , he quits
+while (userInput !== 'q') { // as long as the user doesn't enter 'q' AND 'Q', run the loop
     
-    if(Number(userInput) === 10){                                                       // correct answer, provide an alert
-        alert("You are correct");
+    //if user enter correct result
+    if (Number(userInput) === ans) {
+        alert("You got it right!");
         break;
     }
-    else if(!userInput){                                                                // input empty string, provide an alert and prompt
-        userInput = prompt("You answer is empty. Please enter a value").toLowerCase();
+    else if (!userInput) {
+        userInput = prompt("Your answer is empty. Please enter a value").toLowerCase();
     }
-    else{                                                                               // wrong answer, provide an alert and prompt
-        
-        const hint = (userInput < ans) ? "Higher" : "Lower";                            // provide hints to the user (on the range)
 
-        alert(`Answer incorrect. ${hint} number please.`);
+    else {
+        const msg = userInput < ans ? "Guess Higher!" : "Guess Lower!";
+        alert(`Answer is incorrect. ${msg}`)
         userInput = prompt("Guess the number. Press q or Q to quit.").toLowerCase();
-
     }
 
 }

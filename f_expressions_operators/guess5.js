@@ -1,4 +1,4 @@
-let ans = 10;
+let ans = 88;
 //let ansString = "ten";
 const feedbackGuess = "Guess the number.";
 const feedbackQuit = "Press q or Q to quit.";
@@ -11,21 +11,13 @@ const feedbackEmpty = "Your answer is empty.";
 let userInput = prompt(feedbackGuess.concat (" ", feedbackQuit)).toLowerCase();
 
 // function to evaluate string answer
-function evaluateStringAnswer(userInput){
-    return answerLookUp[userInput] === ans;
-}
-function evaluateStringAnswerLower(userInput){
-    return answerLookUp[userInput] < ans;
-}
-function evaluateStringAnswerHigher(userInput){
-    return answerLookUp[userInput] > ans;
-}
+
 // as long as the user doesn't enter 'q' AND 'Q', run the loop
 while (userInput !== `q`) {
     let correctAns = false;
     let feedback = "";
     switch (true) {
-        case (Number(userInput) === ans || evaluateStringAnswer(userInput)):
+        case (Number(userInput) === ans || text2num(userInput) === ans):
             correctAns = true;
             feedback = feedbackCorrect;
             break;
@@ -33,30 +25,16 @@ while (userInput !== `q`) {
             correctAns = false;
             feedback = feedbackEmpty;
             break;
-        case (Number(userInput) > ans || evaluateStringAnswerHigher(userInput)):
+        case (Number(userInput) > ans || text2num(userInput) > ans):
             correctAns = false;
             feedback = feedbackTooHigh;
             break;
-        case (Number(userInput) < ans || evaluateStringAnswerLower(userInput)):
+        case (Number(userInput) < ans || text2num(userInput) < ans):
             correctAns = false;
             feedback = feedbackTooLow;
             break;
         default:
             correctAns = false;
-<<<<<<< HEAD
-            feedback = feedbackWrong;                         
-    }
-    
-    alert(feedback);                                                                // give the user the needed feedback first
-    
-    if(correctAns){                                                                 // If answer is correct
-        break;                                                                      // end the trivia
-    }
-
-    // Otherwise (answer is wrong), continue to ask for input.
-    userInput = prompt(feedbackGuess.concat(" ", feedbackQuit)).toLowerCase();
-}
-=======
             feedback = feedbackWrong;
     }
     alert (feedback);
@@ -66,4 +44,3 @@ while (userInput !== `q`) {
    userInput = prompt(feedbackGuess.concat (" ", feedbackQuit)).toLowerCase();
 }
  
->>>>>>> 2eca546 (guess update and operators js files)
