@@ -144,13 +144,27 @@ class Field {
     this.playerPosition.x = this.newPosition.x;
     this.playerPosition.y = this.newPosition.y;
   }
-
+  trapCount(){
+    console.log("Map reset");
+    Field.generateField(ROWS, COLS, PERCENT);
+    let count = 0;
+    do{if((this.hatPosition.x - 1) === -1 || this.field[this.hatPosition.x - 1][this.hatPosition.y] === HOLE  ) //check top
+        count++;
+      if ((this.hatPosition.x + 1) === ROWS ||this.field[this.hatPosition.x + 1][this.hatPosition.y] === HOLE )  //check btm
+        count++;
+      if((this.hatPosition.y - 1) === -1 || this.field[this.hatPosition.x][this.hatPosition.y-1] === HOLE  ) //check left 
+        count++;
+      if((this.hatPosition.y + 1) === COLS || this.field[this.hatPosition.x][this.hatPosition.y+1] === HOLE  ) //check right
+        count++;
+      }
+   while(count >=3 )
+  }
   //TODO: start() a method of the class to start the game
   start() {
     this.gamePlay = true;   // set gamePLay to true to start
     this.field[0][0] = PLAYER;
     this.setHat(); //position of hat
-
+    this.trapCount()
     //TODO:Ask to play
     // while gamePlay === true, track the player moves and update
     do {
@@ -191,9 +205,11 @@ class Field {
 
 
     //  TODO: trap protocol
+    
+        
     // start(){
     // immediate-left and immediate-right, immediate-top and immediate-bottom is blocked
-    //if(hatBlocked(this.field) && !this.gamePlay)  
+    //  if(hatBlocked(this.field) && !this.gamePlay)  
     // this.field = Field.generateField();
   }
 }
