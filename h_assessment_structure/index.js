@@ -1,5 +1,5 @@
 const prompt = require("prompt-sync")({ sigint: true });
-
+//03/12/2025
 // TODO: Game elements/assets constants
 const GRASS = "░";
 const HOLE = "O";
