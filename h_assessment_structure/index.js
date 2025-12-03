@@ -20,15 +20,15 @@ const MSG_QUIT = "You quit the game.";
 const MSG_INVALID = "Invalid entry";
 const MSG_WELCOME = "\n*********************************\n⌂ Welcome to Find Your Hat Game ☻\n*********************************\n";
 
-// TODO: WIN / LOSE / OUT / QUIT messages constants
+// Done: WIN / LOSE / OUT / QUIT messages constants
 const WIN = "Congratulations, you won!";
 const LOSE = "You fell into a hole, you lost!";
 const OUT = "You went out-of-bounds, you lost!";
 
-// TODO: MAP ROWS, COLUMNS AND PERCENTAGE
-const ROWS = 10
+// Done: MAP ROWS, COLUMNS AND PERCENTAGE
+const ROWS = 10;
 const COLS = 10;
-const PERCENT = 0.3;
+const PERCENT = 0.2;
 
 class Field {
 
@@ -41,8 +41,8 @@ class Field {
     this.field = field;      //field is passed in as an Array to populate the property field of this class
     this.gamePlay = false;              // game is by defualt = false  , not started
     this.playerPosition = { x: 0, y: 0 }; // player position is default top left
-    this.hatPosition = { x: 0, y: 0 };
-    this.newPosition = { x: 0, y: 0 };
+    this.hatPosition = { x: 0, y: 0 };  // hat position
+    this.newPosition = { x: 0, y: 0 };  // new player position
   }
 
   // DONE: generateField is a static method, returning a 2D array of the fields
@@ -76,21 +76,21 @@ class Field {
   }
 
 
-  // TODO: setHat positions the hat along a random x and y position within field array
+  // DONE: setHat positions the hat along a random x and y position within field array
   setHat() {      // cannot be static as it calls upon field, a  property
-    const xHat = Math.floor(Math.random() * (ROWS - 2)) + 2;  
-    const yHat = Math.floor(Math.random() * (COLS - 1)) + 1;
+    const xHat = Math.floor(Math.random() * (ROWS - 2)) + 2;
+    const yHat = Math.floor(Math.random() * (COLS - 2)) + 2;
     this.field[xHat][yHat] = HAT;
     this.hatPosition.x = xHat;
     this.hatPosition.y = yHat;
   }
-  // TODO: printField displays the updated status of the field position
+  // DONE: printField displays the updated status of the field position
   printField() {   // Display the updated status of field
     this.field.forEach((row) => {
       console.log(row.join(""));
     })
   }
-  // TODO: updateMove displays the move (key) entered by the user
+  // DONE: updateMove displays the move (key) entered by the user
   /**
    * 
    * @param {String} m 
@@ -105,7 +105,7 @@ class Field {
     return console.log(MSG_INVALID);                  // Tell user he entered an invalid value
   }
 
-  // !! TODO: updateGame Assessment Challenge
+  // !! DONE: updateGame Assessment Challenge
   /**
    * 
    * @param {*} m   // accept the value of the player's move 
@@ -143,25 +143,29 @@ class Field {
     this.playerPosition.x = this.newPosition.x;
     this.playerPosition.y = this.newPosition.y;
   }
-  trapCheck(){  //prevent player or hat trapped
-    if ((this.field[this.hatPosition.x - 1][this.hatPosition.y] !== GRASS)    //check top
-      && (this.field[this.hatPosition.x + 1][this.hatPosition.y] !== GRASS)   //check btm
-      && (this.field[this.hatPosition.x][this.hatPosition.y - 1] !== GRASS)   //check left   
-      && (this.field[this.hatPosition.x][this.hatPosition.y + 1] !== GRASS)){ //check right
-      this.field[this.hatPosition.x - 1][this.hatPosition.y] = GRASS; 
-    }
-    if (this.field[0][1] === HOLE && this.field[1][0] === HOLE){   // player trap prevention
-      this.field[0][1] = GRASS;
-
+  trapCheck() {  //prevent hat trapped
+    if ((this.field[this.hatPosition.x - 1][this.hatPosition.y] === HOLE)    //check top
+      && (this.hatPosition.x = (ROWS - 1) || this.field[this.hatPosition.x + 1][this.hatPosition.y] === HOLE)   //check btm
+      && (this.hatPosition.y === 0 || this.field[this.hatPosition.x][this.hatPosition.y - 1] === HOLE)   //check left   
+      && (this.hatPosition.y = (COLS - 1) || this.field[this.hatPosition.x][this.hatPosition.y + 1] === HOLE)) { //check right
+      this.field[this.hatPosition.x][this.hatPosition.y-1] = GRASS;
     }
   }
+
+  playerTrap() { //prevent player trap
+    if (this.field[0][1] === HOLE && this.field[1][0] === HOLE)  // player trap prevention
+      this.field[0][1] = GRASS;
+  }
+      
+
   //DONE: start() a method of the class to start the game
   start() {
-    this.gamePlay = true;   // set gamePLay to true to start
+    this.gamePlay = true;   // set gamePLay to true to startq
     this.field[0][0] = PLAYER;
     this.setHat(); //position of hat
-    this.trapCheck()
-   
+    this.trapCheck();
+    this.playerTrap();
+    
     // while gamePlay === true, track the player moves and update
     do {
 
@@ -208,7 +212,7 @@ Field.welcomeMessage(MSG_WELCOME);
 const game = new Field(gameField);
 
 
-// TODO: Create a new instance of the game
+//DONE: Create a new instance of the game
 
 //DONE: Invoke method start(...) from the instance of game object
 game.start();
