@@ -43,20 +43,6 @@ while (userInput !== `q`) {
             break;
         default:
             correctAns = false;
-<<<<<<< HEAD
-            feedback = feedbackWrong;                         
-    }
-    
-    alert(feedback);                                                                // give the user the needed feedback first
-    
-    if(correctAns){                                                                 // If answer is correct
-        break;                                                                      // end the trivia
-    }
-
-    // Otherwise (answer is wrong), continue to ask for input.
-    userInput = prompt(feedbackGuess.concat(" ", feedbackQuit)).toLowerCase();
-}
-=======
             feedback = feedbackWrong;
     }
     alert (feedback);
@@ -66,4 +52,3 @@ while (userInput !== `q`) {
    userInput = prompt(feedbackGuess.concat (" ", feedbackQuit)).toLowerCase();
 }
  
->>>>>>> 2eca546 (guess update and operators js files)
