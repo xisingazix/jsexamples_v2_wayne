@@ -12,12 +12,12 @@ const LEFT = "a";
 const RIGHT = "d";
 const QUIT = "q";
 // TODO: MSG_UP / MSG_DOWN / MSG_LEFT / MSG_RIGHT / MSG_ QUIT / MSG_INVALID message constants
-const MSG_UP = "You moved up.";
-const MSG_DOWN = "You moved down.";
-const MSG_LEFT = "You moved left.";
-const MSG_RIGHT = "You moved right.";
-const MSG_QUIT = "You quit the game.";
-const MSG_INVALID = "Invalid entry";
+const MSG_UP = "You moved up. \n\n";
+const MSG_DOWN = "You moved down.\n\n";
+const MSG_LEFT = "You moved left.\n\n";
+const MSG_RIGHT = "You moved right.\n\n";
+const MSG_QUIT = "You quit the game.\n\n";
+const MSG_INVALID = "Invalid entry\n\n";
 const MSG_WELCOME = "\n*********************************\n⌂ Welcome to Find Your Hat Game ☻\n*********************************\n";
 
 // Done: WIN / LOSE / OUT / QUIT messages constants
@@ -113,41 +113,36 @@ class Field {
    * @param {*} m   // accept the value of the player's move 
    */
   updateGame(m) {
-    let x = this.playerPosition.x;
-    let y = this.playerPosition.y;
+    let newX = this.playerPosition.x;
+    let newY = this.playerPosition.y;
     switch (m) {
       case UP:
-        this.field[x][y] = GRASS;   //current position  to grass
-        this.playerPosition.x--;    //update current coordinate
-        this.outcome(this.playerPosition.x, this.playerPosition.y); //display generate outcome
+        newX--;    //update current coordinate
+        this.outcome(newX, newY); //display generate outcome
         break;
       case DOWN:
-        this.field[x][y] = GRASS;
-        this.playerPosition.x++;
-        this.outcome(this.playerPosition.x, this.playerPosition.y);
+        newX++;
+        this.outcome(newX, newY);
         break;
       case LEFT:
-        this.field[x][y] = GRASS;
-        this.playerPosition.y--;
-        this.outcome(this.playerPosition.x, this.playerPosition.y);
+        newY--;
+        this.outcome(newX, newY);
         break;
       case RIGHT:
-        this.field[x][y] = GRASS;
-        this.playerPosition.y++;
-        this.outcome(this.playerPosition.x, this.playerPosition.y);
+        newY++;
+        this.outcome(newX, newY);
         break;
       default:
+        console.log('See you next time!')
         break;
       }
-  }
+    this.field[this.playerPosition.x][this.playerPosition.y] = GRASS;//current position  to grass
+    this.playerPosition = { x: newX, y: newY };
+  }  
   //1. update the field to show the player's new position
   outcome(x, y) {
     switch (true) {
-      case (x === - 1 || y === - 1):  //1. if player move out of bound, LOSE// process.exit() ; 
-        console.log(OUT);
-        process.exit();
-        break;
-      case (x === ROWS || y === COLS):
+      case (x === - 1 || y === - 1 || x === ROWS || y === COLS):  //1. if player move out of bound, LOSE// process.exit() ; 
         console.log(OUT);
         process.exit();
         break;
@@ -182,7 +177,7 @@ class Field {
     do {
 
       this.printField();
-      const input = prompt("\n(w)up, (s)down, (a)left, (d)right, (q)exit:");
+      const input = prompt("(w)up, (s)down, (a)left, (d)right, (q)exit:");
       switch (input.toLowerCase()) {
         case UP:
           this.updateMove(UP);
