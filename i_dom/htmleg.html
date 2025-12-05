@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="POST" onsubmit="ftnSubmitForm();">
+        <!-- action / method are 1.properties-->
+        <!-- what is onsubmit? event-->
+    </form>
+
+    <form action="form2" method="POST">
+        <!-- method2-->
+    </form>
+    <!--Internal Script-->
+    <script>
+
+        //eventhandler, method 1
+        function ftnSubmitForm(){
+            alert('This form has been sent!');
+        }
+
+        // event listener listens for the event 'submit', method 2
+        // which then calls the arrow function(callback function to perform the specific task)
+        document.getElementById("form2").addEventListener("submit", ()=>{
+            alert('This second form has been sent')
+        })
+    </script> 
+</body>
+</html>
