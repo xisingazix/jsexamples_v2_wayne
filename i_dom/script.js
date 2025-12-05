@@ -151,10 +151,11 @@ const headerTwoGreeting = document.createElement("h2");
 headerTwoGreeting.innerText = "Welcome to";
 
 const amendTitle = document.body.appendChild(headerTwoGreeting);
-console.log("Target", amendTitle);
+console.log("Target", amendTitle.innerText);
 
 
 amendTitle.innerText = "Welcome to World of JavaScript";
+console.log("Target", amendTitle.innerText);
 
 // 9. parentNode.appendChild(node)
 // Adding a node using appendChild
