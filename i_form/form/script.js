@@ -61,8 +61,9 @@ selectDom.addEventListener("click", () => {     // used click event listen inste
         else {       // remove list item when reselected
             const toRemove = arrSelected.indexOf(itemValue); //find duplicate
             arrSelected.splice(toRemove, 1);      //remove duplicate
-            const removeSelected = document.querySelector(`.${itemValue}`);  // identify the list item to remove
-            document.getElementById("listSelected").removeChild(removeSelected); // remove list item
+            const unselected = document.querySelector(`.${itemValue}`);  // identify the list item to remove
+            unselected.remove(); // remove list item
+
         }
 
     }
@@ -71,3 +72,11 @@ selectDom.addEventListener("click", () => {     // used click event listen inste
 // Clear the selection from listSelected and arrSelected
 // Use the splice method to remove all elements in an array
 
+
+const btnClearSelect = document.getElementById("btnClearSelection");
+
+btnClearSelect.addEventListener("click", () => {
+    arrSelected.splice(0 ,arrSelected.length);  // use dynamic method to remove all ( use length )
+    document.getElementById("listSelected").replaceChildren();
+   
+})
