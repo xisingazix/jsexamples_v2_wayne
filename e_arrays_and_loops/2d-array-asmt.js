@@ -42,7 +42,6 @@ const myField = [
 
 console.log(myField);
 
-<<<<<<< HEAD
 // i referred to as the row
 // j referred to as the column
 
@@ -65,25 +64,4 @@ for (let i = 0; i < rows; i++) {
 
 }
 
-=======
-// i refer to row
-// j refer to column
-
-//dynamic 2d array
-const rows = 3;
-const cols = 3;
-const arr2D = [];       //empty array to start
-
-// Nested for-loop (loop inside a loop)
-// manage row,create rows
-for (let i = 0; i < rows; i++) {
-    arr2D[i] = [];
-    
-    // manage column per row
-    for (let j = 0; j < cols; j++) {
-        arr2D[i][j] = '░';
-        
-    }
-}
->>>>>>> 0c0e91b (add exercises arrays and loops)
 console.log(arr2D);
